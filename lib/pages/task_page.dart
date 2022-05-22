@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/task_list.dart';
+import 'add_task_page.dart';
 
 class TaskPage extends StatelessWidget {
   const TaskPage({Key? key}) : super(key: key);
@@ -11,7 +12,14 @@ class TaskPage extends StatelessWidget {
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return const AddTaskPage();
+            },
+          );
+        },
         child: const Icon(Icons.add),
       ),
       body: Column(
