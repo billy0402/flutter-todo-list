@@ -5,14 +5,9 @@ import '../models/task.dart';
 import '../models/task_data.dart';
 import 'task_item.dart';
 
-class TaskList extends StatefulWidget {
+class TaskList extends StatelessWidget {
   const TaskList({Key? key}) : super(key: key);
 
-  @override
-  State<TaskList> createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
@@ -25,9 +20,7 @@ class _TaskListState extends State<TaskList> {
               title: task.title,
               isChecked: task.isDone,
               onCheckboxClick: (bool? newValue) {
-                setState(() {
-                  task.toggleDone();
-                });
+                taskData.updateTask(task);
               },
             );
           },
