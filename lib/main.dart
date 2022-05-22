@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'models/task_data.dart';
 import 'pages/task_page.dart';
 
 void main() {
@@ -11,8 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: TaskPage(),
+    return ChangeNotifierProvider<TaskData>(
+      create: (BuildContext context) => TaskData(),
+      child: const MaterialApp(
+        home: TaskPage(),
+      ),
     );
   }
 }
