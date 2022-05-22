@@ -15,8 +15,16 @@ class TaskPage extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            isScrollControlled: true,
             builder: (BuildContext context) {
-              return const AddTaskPage();
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: const AddTaskPage(),
+                ),
+              );
             },
           );
         },
