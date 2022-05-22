@@ -6,11 +6,13 @@ class TaskItem extends StatelessWidget {
     required this.title,
     required this.isChecked,
     required this.onCheckboxClick,
+    required this.onLongPress,
   }) : super(key: key);
 
   final String title;
   final bool isChecked;
   final Function(bool?) onCheckboxClick;
+  final Function() onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class TaskItem extends StatelessWidget {
         activeColor: Colors.lightBlueAccent,
         onChanged: onCheckboxClick,
       ),
+      onLongPress: onLongPress,
     );
   }
 }
