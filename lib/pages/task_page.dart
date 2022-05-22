@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/task.dart';
 import '../models/task_data.dart';
 import '../widgets/task_list.dart';
 import 'add_task_page.dart';
 
-class TaskPage extends StatefulWidget {
+class TaskPage extends StatelessWidget {
   const TaskPage({Key? key}) : super(key: key);
 
-  @override
-  State<TaskPage> createState() => _TaskPageState();
-}
-
-class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
@@ -32,11 +26,7 @@ class _TaskPageState extends State<TaskPage> {
                       padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom,
                       ),
-                      child: AddTaskPage(addTask: (Task newTask) {
-                        setState(() {
-                          taskData.tasks.add(newTask);
-                        });
-                      }),
+                      child: const AddTaskPage(),
                     ),
                   );
                 },
