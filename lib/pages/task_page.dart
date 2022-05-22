@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../models/task.dart';
 import '../widgets/task_list.dart';
 import 'add_task_page.dart';
 
-class TaskPage extends StatelessWidget {
+class TaskPage extends StatefulWidget {
   const TaskPage({Key? key}) : super(key: key);
+
+  @override
+  State<TaskPage> createState() => _TaskPageState();
+}
+
+class _TaskPageState extends State<TaskPage> {
+  List<Task> tasks = <Task>[
+    Task(title: 'Buy milk'),
+    Task(title: 'Buy eggs'),
+    Task(title: 'Buy bread'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +34,11 @@ class TaskPage extends StatelessWidget {
                   padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
                   ),
-                  child: const AddTaskPage(),
+                  child: AddTaskPage(addTask: (Task newTask) {
+                    setState(() {
+                      tasks.add(newTask);
+                    });
+                  }),
                 ),
               );
             },
@@ -42,8 +58,8 @@ class TaskPage extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
-                CircleAvatar(
+              children: <Widget>[
+                const CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
                   child: Icon(
@@ -52,8 +68,8 @@ class TaskPage extends StatelessWidget {
                     size: 30.0,
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Text(
+                const SizedBox(height: 10.0),
+                const Text(
                   'Todo List',
                   style: TextStyle(
                     color: Colors.white,
@@ -62,8 +78,8 @@ class TaskPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
-                  style: TextStyle(
+                  '${tasks.length} Tasks',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
                   ),
@@ -81,7 +97,7 @@ class TaskPage extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: const TaskList(),
+              child: TaskList(tasks: tasks),
             ),
           ),
         ],

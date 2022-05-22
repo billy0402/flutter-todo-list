@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../models/task.dart';
+
 class AddTaskPage extends StatelessWidget {
-  const AddTaskPage({Key? key}) : super(key: key);
+  const AddTaskPage({Key? key, required this.addTask}) : super(key: key);
+
+  final Function(Task newTask) addTask;
 
   @override
   Widget build(BuildContext context) {
+    String newTaskTitle = '';
+
     return Container(
       color: const Color(0xFF757575),
       child: Container(
@@ -27,9 +33,12 @@ class AddTaskPage extends StatelessWidget {
                   color: Colors.lightBlueAccent,
                 ),
               ),
-              const TextField(
+              TextField(
                 autofocus: true,
                 textAlign: TextAlign.center,
+                onChanged: (String newValue) {
+                  newTaskTitle = newValue;
+                },
               ),
               TextButton(
                 style: ButtonStyle(
@@ -37,7 +46,12 @@ class AddTaskPage extends StatelessWidget {
                     Colors.lightBlueAccent,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  if (newTaskTitle.isNotEmpty) {
+                    addTask(Task(title: newTaskTitle));
+                    Navigator.pop(context);
+                  }
+                },
                 child: const Text(
                   'Add',
                   style: TextStyle(color: Colors.white),
